@@ -19,12 +19,23 @@ import {
   Coffee,
   Cpu,
   Database,
+  ArrowRight,
+  Calendar,
+  Package,
+  GitBranch,
+  Brain,
+  Globe,
+  TrendingUp,
+  Award,
+  Users,
+  CheckCircle,
 } from "lucide-react";
 
 const PythonMGPWebsite = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [typedText, setTypedText] = useState("");
   const [currentCodeIndex, setCurrentCodeIndex] = useState(0);
+  const [hoveredTimeline, setHoveredTimeline] = useState(null);
 
   const pythonSnippets = [
     "import this",
@@ -136,10 +147,10 @@ const PythonMGPWebsite = () => {
   const NavButton = ({ item }) => (
     <button
       onClick={() => setActiveSection(item.id)}
-      className={`group relative flex items-center gap-3 w-full p-4 rounded-2xl transition-all duration-300 ${
+      className={`group relative flex items-center gap-3 w-full p-4 rounded-2xl transition-all duration-300 transform ${
         activeSection === item.id
-          ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg`
-          : "text-gray-300 hover:bg-white/10 backdrop-blur-sm border border-white/10 hover:border-white/20"
+          ? `bg-gradient-to-r ${item.gradient} text-white shadow-lg scale-105`
+          : "text-gray-300 hover:bg-white/10 backdrop-blur-sm border border-white/10 hover:border-white/20 hover:scale-105"
       }`}
     >
       <div
@@ -151,9 +162,9 @@ const PythonMGPWebsite = () => {
       >
         <item.icon size={20} />
       </div>
-      <span className="font-medium">{item.label}</span>
+      <span className="font-medium flex-1 text-left">{item.label}</span>
       {activeSection === item.id && (
-        <div className="ml-auto">
+        <div className="ml-auto transition-all duration-300">
           <ChevronRight size={16} className="animate-pulse" />
         </div>
       )}
@@ -199,10 +210,7 @@ const PythonMGPWebsite = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 blur-3xl rounded-full"></div>
               <div className="relative">
                 <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-white/10 px-6 py-3 rounded-full mb-8 hover:scale-105 transition-transform duration-300">
-                  <Sparkles
-                    className="text-purple-400 animate-spin"
-                    size={24}
-                  />
+                  <Sparkles className="text-purple-400" size={24} />
                   <span className="text-purple-200 font-semibold text-lg">
                     Multi-Genre Project
                   </span>
@@ -237,14 +245,14 @@ const PythonMGPWebsite = () => {
               {navigationItems.slice(1).map((item, index) => (
                 <div
                   key={item.id}
-                  className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 transition-all duration-300 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:shadow-xl hover:shadow-purple-500/10"
+                  className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 transition-all duration-300 cursor-pointer hover:bg-white/10 hover:border-white/20 hover:shadow-xl hover:shadow-purple-500/10 hover:scale-105"
                   onClick={() => setActiveSection(item.id)}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="relative z-10">
                     <div className="flex items-center gap-4 mb-4">
                       <div
-                        className={`p-4 bg-gradient-to-r ${item.gradient} rounded-2xl shadow-lg transition-transform duration-300 group-hover:scale-105`}
+                        className={`p-4 bg-gradient-to-r ${item.gradient} rounded-2xl shadow-lg transition-transform duration-300 group-hover:scale-110`}
                       >
                         <item.icon className="text-white" size={28} />
                       </div>
@@ -346,19 +354,10 @@ const PythonMGPWebsite = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl shadow-lg hover:rotate-3 transition-transform duration-300">
+                  <div className="p-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl shadow-lg hover:scale-110 transition-transform duration-300">
                     <Quote className="text-white" size={32} />
                   </div>
                   <h2 className="text-4xl font-bold text-white">Dear Reader</h2>
-                  <PythonTerminal title="dear_reader.py">
-                    <span className="text-blue-400">{">>> "}</span>
-                    <span className="text-yellow-400">print</span>
-                    <span className="text-white">(</span>
-                    <span className="text-green-400">
-                      "Welcome to my journey!"
-                    </span>
-                    <span className="text-white">)</span>
-                  </PythonTerminal>
                 </div>
 
                 <div className="prose prose-xl max-w-none text-gray-300 leading-relaxed space-y-8">
@@ -432,7 +431,7 @@ const PythonMGPWebsite = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl shadow-lg hover:rotate-3 transition-transform duration-300">
+                  <div className="p-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl shadow-lg hover:scale-110 transition-transform duration-300">
                     <FileText className="text-white" size={32} />
                   </div>
                   <h2 className="text-4xl font-bold text-white">
@@ -450,29 +449,6 @@ const PythonMGPWebsite = () => {
                     <Terminal className="text-green-400" size={20} />
                   </div>
                 </div>
-
-                <PythonTerminal title="informational_essay.py">
-                  <div className="space-y-4">
-                    <div className="text-gray-400">
-                      # Your comprehensive essay about Python's dominance
-                    </div>
-                    <div className="text-yellow-400">def</div>{" "}
-                    <div className="text-blue-400 inline">
-                      explain_python_success
-                    </div>
-                    <div className="text-white inline">():</div>
-                    <div className="ml-4 text-gray-400">
-                      # Insert your 250-350 word essay here
-                    </div>
-                    <div className="ml-4 text-gray-400">
-                      # Remember to cite at least 3 sources
-                    </div>
-                    <div className="ml-4 text-green-400">return</div>{" "}
-                    <div className="text-green-400 inline">
-                      "Python bridges complexity!"
-                    </div>
-                  </div>
-                </PythonTerminal>
 
                 <div className="prose prose-xl max-w-none text-gray-300 space-y-6">
                   <div className="text-lg leading-relaxed space-y-6">
@@ -542,41 +518,6 @@ const PythonMGPWebsite = () => {
                       (OpenCV).
                     </p>
                   </div>
-
-                  <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 mt-8">
-                    <h4 className="font-bold text-white mb-4 text-xl flex items-center gap-3">
-                      <Code className="text-green-400" />
-                      Essay Structure Reminder:
-                    </h4>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3 text-gray-300 hover:text-purple-300 transition-colors duration-300">
-                          <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse"></div>
-                          <span>
-                            Introduction: Hook readers with Python's paradox
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-3 text-gray-300 hover:text-blue-300 transition-colors duration-300">
-                          <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full animate-pulse delay-75"></div>
-                          <span>
-                            Body: Explain technical reasons for Python's success
-                          </span>
-                        </div>
-                      </div>
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3 text-gray-300 hover:text-green-300 transition-colors duration-300">
-                          <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full animate-pulse delay-150"></div>
-                          <span>
-                            Body: Real-world applications and case studies
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-3 text-gray-300 hover:text-yellow-300 transition-colors duration-300">
-                          <div className="w-2 h-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full animate-pulse delay-300"></div>
-                          <span>Conclusion: Python's future in technology</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -597,7 +538,7 @@ const PythonMGPWebsite = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl shadow-lg hover:rotate-3 transition-transform duration-300">
+                  <div className="p-4 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl shadow-lg hover:scale-110 transition-transform duration-300">
                     <Video className="text-white" size={32} />
                   </div>
                   <h2 className="text-4xl font-bold text-white">
@@ -613,30 +554,21 @@ const PythonMGPWebsite = () => {
 
                 <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 backdrop-blur-sm border border-red-400/30 rounded-2xl p-8 mb-8">
                   <h3 className="font-bold text-white mb-3 text-xl flex items-center gap-3">
-                    <Cpu className="text-orange-400 animate-spin" />
-                    Project Overview
+                    <Cpu className="text-orange-400" />
+                    Project Overview: Flower Recognition AI
                   </h3>
                   <p className="text-red-200">
-                    A hands-on demonstration of Python's capabilities through a
-                    practical project that showcases why the language excels in
-                    real-world applications.
+                    Demonstrating Python's capabilities through a
+                    TensorFlow-based convolutional neural network that
+                    classifies different flower species. This project showcases
+                    Python's dominance in machine learning and its accessible
+                    syntax for complex AI applications.
                   </p>
                 </div>
 
                 <div className="space-y-8">
                   <div className="relative aspect-video bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-white/10 overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20"></div>
-
-                    {/* Video controls simulation */}
-                    <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="flex items-center gap-4">
-                        <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                        <div className="flex-1 h-1 bg-white/20 rounded-full">
-                          <div className="w-1/3 h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
-                        </div>
-                        <span className="text-white text-sm">2:34 / 7:42</span>
-                      </div>
-                    </div>
 
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
@@ -648,23 +580,11 @@ const PythonMGPWebsite = () => {
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
                         </div>
                         <p className="text-white font-bold text-2xl mb-2">
-                          Your Python Project Video
+                          Flower Recognition with CNN
                         </p>
                         <p className="text-gray-400">
-                          Embed your video demonstration here
+                          Building and training a deep learning model in Python
                         </p>
-
-                        {/* Simulated terminal in video */}
-                        <div className="mt-8 max-w-md mx-auto">
-                          <PythonTerminal title="project_demo.py">
-                            <div className="text-green-400">
-                              <span className="text-blue-400">{">>> "}</span>
-                              <span className="animate-pulse">
-                                python amazing_project.py
-                              </span>
-                            </div>
-                          </PythonTerminal>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -672,10 +592,7 @@ const PythonMGPWebsite = () => {
                   <div className="grid lg:grid-cols-2 gap-8">
                     <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300">
                       <h4 className="font-bold text-white mb-6 text-xl flex items-center gap-3">
-                        <Star
-                          className="text-yellow-400 animate-spin"
-                          size={24}
-                        />
+                        <Star className="text-yellow-400" size={24} />
                         Project Details
                       </h4>
                       <div className="space-y-4">
@@ -687,18 +604,18 @@ const PythonMGPWebsite = () => {
                           },
                           {
                             label: "Libraries Used",
-                            value: "[Your libraries here]",
+                            value: "TensorFlow, Keras, NumPy, Pandas",
                             icon: "📚",
                           },
                           {
-                            label: "Duration",
-                            value: "[Project timeline]",
-                            icon: "⏱️",
+                            label: "Model Type",
+                            value: "Convolutional Neural Network (CNN)",
+                            icon: "🧠",
                           },
                           {
-                            label: "Complexity",
-                            value: "Beginner to Intermediate",
-                            icon: "📈",
+                            label: "Dataset",
+                            value: "14 Flower Categories",
+                            icon: "🌸",
                           },
                         ].map((item, index) => (
                           <div
@@ -725,10 +642,10 @@ const PythonMGPWebsite = () => {
                       </h4>
                       <div className="space-y-4">
                         {[
-                          "Python's readable syntax advantages",
-                          "Library ecosystem benefits",
-                          "Rapid prototyping capabilities",
-                          "Real-world application insights",
+                          "Python's readable syntax for complex neural networks",
+                          "TensorFlow's high-level API accessibility",
+                          "Data augmentation techniques in Keras",
+                          "Transfer learning possibilities with Python",
                         ].map((item, index) => (
                           <div
                             key={index}
@@ -745,37 +662,55 @@ const PythonMGPWebsite = () => {
                     </div>
                   </div>
 
-                  <PythonTerminal title="code_highlights.py">
+                  <PythonTerminal title="flower_recognition_model.py">
                     <div className="space-y-2">
                       <div className="text-gray-500">
-                        # Your key code snippets here
+                        # Key code from the flower recognition project
                       </div>
                       <div className="text-green-400">
-                        import{" "}
-                        <span className="text-blue-400">library_name</span>
+                        import <span className="text-blue-400">tensorflow</span>{" "}
+                        as <span className="text-purple-400">tf</span>
                       </div>
-                      <div className="text-white">
+                      <div className="text-green-400">
+                        from{" "}
+                        <span className="text-blue-400">
+                          tensorflow.keras.models
+                        </span>{" "}
+                        import{" "}
+                        <span className="text-purple-400">Sequential</span>
+                      </div>
+                      <div className="text-green-400">
+                        from{" "}
+                        <span className="text-blue-400">
+                          tensorflow.keras.layers
+                        </span>{" "}
+                        import{" "}
+                        <span className="text-purple-400">
+                          Conv2D, MaxPool2D, Dense, Flatten
+                        </span>
+                      </div>
+                      <div className="text-white mt-4">
                         <span className="text-purple-400">def</span>{" "}
-                        <span className="text-yellow-400">main_function</span>
+                        <span className="text-yellow-400">
+                          build_flower_model
+                        </span>
                         ():
                       </div>
                       <div className="text-gray-500 ml-4">
-                        # Demonstrate Python's simplicity
+                        # Building a CNN with just a few lines of Python!
                       </div>
                       <div className="text-white ml-4">
-                        <span className="text-blue-400">print</span>(
-                        <span className="text-green-400">
-                          "Python bridges complexity!"
-                        </span>
-                        )
-                      </div>
-                      <div className="text-white">
-                        <span className="text-purple-400">if</span>{" "}
-                        <span className="text-blue-400">__name__</span> =={" "}
-                        <span className="text-green-400">"__main__"</span>:
+                        model ={" "}
+                        <span className="text-purple-400">Sequential</span>()
                       </div>
                       <div className="text-white ml-4">
-                        <span className="text-yellow-400">main_function</span>()
+                        model.<span className="text-yellow-400">add</span>(
+                        <span className="text-purple-400">Conv2D</span>(64,
+                        (3,3), activation=
+                        <span className="text-green-400">'relu'</span>))
+                      </div>
+                      <div className="text-white ml-4">
+                        <span className="text-blue-400">return</span> model
                       </div>
                     </div>
                   </PythonTerminal>
@@ -787,141 +722,236 @@ const PythonMGPWebsite = () => {
 
       case "timeline":
         return (
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-12 shadow-2xl overflow-hidden">
-              {/* Python version numbers floating */}
-              <div className="absolute inset-0 opacity-10">
-                {["1.0", "2.0", "2.7", "3.0", "3.6", "3.9", "3.11"].map(
-                  (version, i) => (
-                    <div
-                      key={i}
-                      className="absolute text-4xl font-bold text-green-400 animate-float"
-                      style={{
-                        left: `${10 + i * 12}%`,
-                        top: `${20 + (i % 3) * 20}%`,
-                        animationDelay: `${i * 0.5}s`,
-                      }}
-                    >
-                      v{version}
-                    </div>
-                  )
-                )}
-              </div>
-
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl shadow-lg hover:rotate-3 transition-transform duration-300">
+                  <div className="p-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl shadow-lg hover:scale-110 transition-transform duration-300">
                     <BarChart3 className="text-white" size={32} />
                   </div>
                   <h2 className="text-4xl font-bold text-white">
                     Python Evolution Timeline
                   </h2>
-                  <div className="ml-auto">
-                    <PythonTerminal title="timeline.py">
-                      <span className="text-blue-400">{">>> "}</span>
-                      <span className="text-yellow-400">import</span>
-                      <span className="text-white"> </span>
-                      <span className="text-green-400">history</span>
-                    </PythonTerminal>
-                  </div>
                 </div>
 
                 <div className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 backdrop-blur-sm border border-indigo-400/30 rounded-2xl p-8 mb-12">
                   <p className="text-indigo-200 text-lg flex items-center gap-3">
                     <Database className="text-indigo-400 animate-pulse" />A
-                    visual journey through Python's development from Guido van
-                    Rossum's creation to becoming the backbone of modern AI and
-                    automation.
+                    comprehensive timeline of Python's development from 1989 to
+                    present, showing key milestones that led to its dominance in
+                    AI and data science.
                   </p>
                 </div>
 
-                <div className="space-y-12">
-                  {[
-                    {
-                      year: "1991",
-                      event: "Python 0.9.0 Released",
-                      description: "Guido van Rossum releases first version",
-                      color: "from-red-500 to-pink-500",
-                      code: "print('Hello World!')",
-                    },
-                    {
-                      year: "2000",
-                      event: "Python 2.0",
-                      description:
-                        "Introduction of list comprehensions and garbage collection",
-                      color: "from-orange-500 to-yellow-500",
-                      code: "[x for x in range(10)]",
-                    },
-                    {
-                      year: "2008",
-                      event: "Python 3.0",
-                      description: "Major redesign, not backward compatible",
-                      color: "from-green-500 to-emerald-500",
-                      code: "print('Python 3!')",
-                    },
-                    {
-                      year: "2010s",
-                      event: "AI Boom",
-                      description:
-                        "Python becomes dominant in machine learning",
-                      color: "from-blue-500 to-cyan-500",
-                      code: "import tensorflow as tf",
-                    },
-                    {
-                      year: "2020s",
-                      event: "Industry Standard",
-                      description:
-                        "Python in automation, web dev, and data science",
-                      color: "from-purple-500 to-indigo-500",
-                      code: "async def future():",
-                    },
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex gap-8 items-center group hover:scale-105 transition-transform duration-300"
-                    >
-                      <div className="flex-shrink-0 w-24 text-right">
+                {/* Interactive Timeline */}
+                <div className="relative">
+                  {/* Timeline Line */}
+                  <div className="absolute left-12 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-indigo-500"></div>
+
+                  <div className="space-y-16">
+                    {[
+                      {
+                        year: "December 1989",
+                        event: "Python Conceived",
+                        description:
+                          "Guido van Rossum starts developing Python as a hobby project during Christmas holidays at CWI in the Netherlands.",
+                        icon: Calendar,
+                        color: "from-red-500 to-pink-500",
+                        code: "# Python is born!",
+                        source: "Wikipedia - Python (programming language)",
+                      },
+                      {
+                        year: "February 1991",
+                        event: "Python 0.9.0 Released",
+                        description:
+                          "First public release of Python. Featured classes with inheritance, exception handling, functions, and core data types.",
+                        icon: Package,
+                        color: "from-orange-500 to-yellow-500",
+                        code: "print 'Hello, World!'",
+                        source: "Computer History Museum - Guido van Rossum",
+                      },
+                      {
+                        year: "2000",
+                        event: "Python 2.0",
+                        description:
+                          "Major release introducing list comprehensions, garbage collection, and Unicode support. Python Software Foundation formed.",
+                        icon: GitBranch,
+                        color: "from-green-500 to-emerald-500",
+                        code: "[x**2 for x in range(10)]",
+                        source: "GeeksforGeeks - History of Python",
+                      },
+                      {
+                        year: "2006",
+                        event: "NumPy 1.0 Released",
+                        description:
+                          "NumPy reaches 1.0, providing the foundation for scientific computing in Python. Enables efficient array operations.",
+                        icon: Database,
+                        color: "from-blue-500 to-cyan-500",
+                        code: "import numpy as np",
+                        source: "KDnuggets - Python for Data Science",
+                      },
+                      {
+                        year: "2007",
+                        event: "Scikit-learn Started",
+                        description:
+                          "David Cournapeau begins scikit-learn as a Google Summer of Code project, bringing machine learning to Python.",
+                        icon: Brain,
+                        color: "from-purple-500 to-indigo-500",
+                        code: "from sklearn import svm",
+                        source: "Wikipedia - Scikit-learn",
+                      },
+                      {
+                        year: "2008",
+                        event: "Python 3.0",
+                        description:
+                          "Major redesign of the language, not backward compatible. Improved Unicode support and cleaner syntax.",
+                        icon: Zap,
+                        color: "from-pink-500 to-rose-500",
+                        code: "print('Python 3 is here!')",
+                        source: "Python.org Documentation",
+                      },
+                      {
+                        year: "2010",
+                        event: "Data Science Boom Begins",
+                        description:
+                          "Pandas created by Wes McKinney. Python starts becoming the preferred language for data analysis.",
+                        icon: TrendingUp,
+                        color: "from-yellow-500 to-orange-500",
+                        code: "import pandas as pd",
+                        source: "DataCamp - Top Python Libraries",
+                      },
+                      {
+                        year: "2015",
+                        event: "TensorFlow Released",
+                        description:
+                          "Google releases TensorFlow, making deep learning accessible. Python becomes the primary interface for AI development.",
+                        icon: Globe,
+                        color: "from-red-500 to-purple-500",
+                        code: "import tensorflow as tf",
+                        source: "TensorFlow.org",
+                      },
+                      {
+                        year: "2016-2017",
+                        event: "PyTorch Released",
+                        description:
+                          "Facebook releases PyTorch, offering dynamic computational graphs. Python solidifies its position in AI research.",
+                        icon: Zap,
+                        color: "from-orange-500 to-red-500",
+                        code: "import torch",
+                        source: "TensorGym - PyTorch History",
+                      },
+                      {
+                        year: "2018-2020",
+                        event: "Python Dominance",
+                        description:
+                          "Python becomes most popular language for data science, machine learning, and AI. Used by tech giants worldwide.",
+                        icon: Award,
+                        color: "from-green-500 to-blue-500",
+                        code: "# Python everywhere!",
+                        source: "GitHub Language Statistics",
+                      },
+                      {
+                        year: "2024-Present",
+                        event: "AI Era Leadership",
+                        description:
+                          "Python remains the undisputed leader in AI/ML. Powers ChatGPT, autonomous vehicles, and scientific breakthroughs.",
+                        icon: Users,
+                        color: "from-purple-500 to-pink-500",
+                        code: "async def future():",
+                        source: "TIOBE Index 2024",
+                      },
+                    ].map((item, index) => (
+                      <div
+                        key={index}
+                        className="relative flex items-start gap-8 group"
+                        onMouseEnter={() => setHoveredTimeline(index)}
+                        onMouseLeave={() => setHoveredTimeline(null)}
+                      >
+                        {/* Timeline Node */}
+                        <div className="relative z-10">
+                          <div
+                            className={`w-24 h-24 bg-gradient-to-r ${
+                              item.color
+                            } rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${
+                              hoveredTimeline === index ? "scale-125" : ""
+                            }`}
+                          >
+                            <item.icon className="text-white" size={32} />
+                          </div>
+                          <div className="absolute inset-0 rounded-full animate-ping bg-white/20"></div>
+                        </div>
+
+                        {/* Content */}
                         <div
-                          className={`bg-gradient-to-r ${item.color} text-white px-4 py-2 rounded-full text-lg font-bold shadow-lg group-hover:scale-110 transition-transform duration-300 relative`}
+                          className={`flex-1 transition-all duration-300 ${
+                            hoveredTimeline === index ? "scale-105" : ""
+                          }`}
                         >
-                          {item.year}
-                          <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                            <div className="flex items-start justify-between mb-4">
+                              <div>
+                                <h3 className="text-2xl font-bold text-white mb-2">
+                                  {item.event}
+                                </h3>
+                                <p
+                                  className={`text-lg font-semibold bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
+                                >
+                                  {item.year}
+                                </p>
+                              </div>
+                              <PythonTerminal title="snippet.py">
+                                <span className="text-green-400 text-xs">
+                                  {item.code}
+                                </span>
+                              </PythonTerminal>
+                            </div>
+                            <p className="text-gray-300 mb-4">
+                              {item.description}
+                            </p>
+                            <div className="flex items-center gap-2 text-sm text-gray-400">
+                              <CheckCircle
+                                size={16}
+                                className="text-green-400"
+                              />
+                              <span>Source: {item.source}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex-shrink-0 relative">
-                        <div
-                          className={`w-6 h-6 bg-gradient-to-r ${item.color} rounded-full border-4 border-white/20 shadow-lg group-hover:scale-125 transition-transform duration-300 relative`}
-                        >
-                          <div className="absolute inset-0 rounded-full animate-ping bg-white/30"></div>
-                        </div>
-                        {index < 4 && (
-                          <div className="w-1 h-20 bg-gradient-to-b from-white/30 to-white/10 ml-2.5 mt-4"></div>
-                        )}
-                      </div>
-                      <div className="flex-grow bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 group-hover:bg-white/10 transition-all duration-300 relative overflow-hidden">
-                        {/* Code snippet background */}
-                        <div className="absolute top-2 right-4 opacity-20 font-mono text-xs text-green-400">
-                          {item.code}
-                        </div>
-                        <h3 className="font-bold text-white text-xl mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300">
-                          {item.event}
-                        </h3>
-                        <p className="text-gray-300">{item.description}</p>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+
+                {/* Key Statistics */}
+                <div className="mt-16 grid md:grid-cols-3 gap-8">
+                  <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-sm rounded-2xl p-8 border border-purple-400/30 text-center">
+                    <h4 className="text-4xl font-bold text-white mb-2">35+</h4>
+                    <p className="text-purple-300">Years of Development</p>
+                    <p className="text-sm text-gray-400 mt-2">Since 1989</p>
+                  </div>
+                  <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-400/30 text-center">
+                    <h4 className="text-4xl font-bold text-white mb-2">#1</h4>
+                    <p className="text-blue-300">Language for AI/ML</p>
+                    <p className="text-sm text-gray-400 mt-2">
+                      Industry Standard
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-sm rounded-2xl p-8 border border-green-400/30 text-center">
+                    <h4 className="text-4xl font-bold text-white mb-2">80%</h4>
+                    <p className="text-green-300">ML Papers Use Python</p>
+                    <p className="text-sm text-gray-400 mt-2">
+                      Conference Statistics
+                    </p>
+                  </div>
                 </div>
 
                 <div className="mt-12 p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
                   <p className="text-gray-300 italic text-center text-lg">
-                    💡{" "}
-                    <strong className="text-white">
-                      Your infographic timeline content goes here:
-                    </strong>{" "}
-                    Create a visual representation of Python's journey,
-                    highlighting key moments that led to its current dominance
-                    in AI and automation.
+                    <strong className="text-white">Sources:</strong> Data
+                    compiled from Wikipedia, Computer History Museum,
+                    Python.org, TensorFlow documentation, scikit-learn history,
+                    and industry reports (2024).
                   </p>
                 </div>
               </div>
@@ -955,7 +985,7 @@ const PythonMGPWebsite = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl shadow-lg hover:rotate-3 transition-transform duration-300">
+                  <div className="p-4 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl shadow-lg hover:scale-110 transition-transform duration-300">
                     <Code className="text-white" size={32} />
                   </div>
                   <h2 className="text-4xl font-bold text-white">
@@ -1060,7 +1090,7 @@ data = pd.read_csv('data.csv')`,
 
                     <div className="relative z-10">
                       <h4 className="font-bold text-white mb-6 text-xl flex items-center gap-3">
-                        <Sparkles className="text-purple-400 animate-spin" />
+                        <Sparkles className="text-purple-400" />
                         Tutorial Extension Ideas
                       </h4>
                       <div className="grid md:grid-cols-2 gap-8">
@@ -1148,7 +1178,7 @@ data = pd.read_csv('data.csv')`,
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-rose-500/10 rounded-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl shadow-lg hover:rotate-3 transition-transform duration-300">
+                  <div className="p-4 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl shadow-lg hover:scale-110 transition-transform duration-300">
                     <User className="text-white" size={32} />
                   </div>
                   <h2 className="text-4xl font-bold text-white">
@@ -1263,7 +1293,7 @@ data = pd.read_csv('data.csv')`,
 
                     <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-400/30 hover:scale-105 transition-transform duration-300">
                       <h4 className="font-bold text-blue-300 mb-6 text-xl flex items-center gap-3">
-                        <span className="text-2xl animate-spin">🚀</span>
+                        <span className="text-2xl">🚀</span>
                         Future Applications
                       </h4>
                       <div className="space-y-4">
@@ -1334,7 +1364,7 @@ data = pd.read_csv('data.csv')`,
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl shadow-lg hover:rotate-3 transition-transform duration-300">
+                  <div className="p-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl shadow-lg hover:scale-110 transition-transform duration-300">
                     <Lightbulb className="text-white" size={32} />
                   </div>
                   <h2 className="text-4xl font-bold text-white">End Notes</h2>
@@ -1445,10 +1475,7 @@ data = pd.read_csv('data.csv')`,
 
                     <div className="relative z-10">
                       <h4 className="font-bold text-white mb-4 text-xl flex items-center gap-3">
-                        <Star
-                          className="text-yellow-400 animate-spin"
-                          size={24}
-                        />
+                        <Star className="text-yellow-400" size={24} />
                         Presentation Notes
                       </h4>
                       <p className="text-gray-300 leading-relaxed">
@@ -1488,7 +1515,7 @@ data = pd.read_csv('data.csv')`,
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-3xl"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl shadow-lg hover:rotate-3 transition-transform duration-300">
+                  <div className="p-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl shadow-lg hover:scale-110 transition-transform duration-300">
                     <BookOpen className="text-white" size={32} />
                   </div>
                   <h2 className="text-4xl font-bold text-white">Works Cited</h2>
@@ -1517,17 +1544,27 @@ data = pd.read_csv('data.csv')`,
                 <div className="space-y-8">
                   <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
                     <p className="text-gray-300 mb-6">
-                      <strong className="text-white">Instructions:</strong> List
-                      all sources used in your research, formatted in MLA style.
-                      Include web sources, interviews, documentation, books, and
-                      any other materials referenced.
+                      <strong className="text-white">
+                        Actual Sources Used in This Timeline:
+                      </strong>
                     </p>
 
                     <div className="space-y-4">
                       {[
-                        'van Rossum, Guido. "The History of Python." Python.org, Python Software Foundation, 2023, www.python.org/doc/essays/blurb/. Accessed 15 May 2025.',
-                        "[Example Citation 2] - Your actual research sources go here",
-                        "[Example Citation 3] - Remember to include at least 3 sources for your informational essay",
+                        '"2018 Museum Fellow Guido van Rossum, Python Creator & Benevolent Dictator for Life." Computer History Museum, 16 Sept. 2019, computerhistory.org/blog/2018-chm-fellow-guido-van-rossum-python-creator-benevolent-dictator-for-life/.',
+                        '"Guido van Rossum - CHM." Computer History Museum, 10 Feb. 2021, computerhistory.org/profile/guido-van-rossum/.',
+                        '"Guido van Rossum." Wikipedia, Wikimedia Foundation, 3 days ago, en.wikipedia.org/wiki/Guido_van_Rossum.',
+                        '"History of Python." GeeksforGeeks, 2 Jan. 2025, www.geeksforgeeks.org/history-of-python/.',
+                        '"Python (programming language)." Wikipedia, Wikimedia Foundation, 3 days ago, en.wikipedia.org/wiki/Python_(programming_language).',
+                        '"scikit-learn." Wikipedia, Wikimedia Foundation, 4 days ago, en.wikipedia.org/wiki/Scikit-learn.',
+                        '"TensorFlow." Wikipedia, Wikimedia Foundation, 5 days ago, en.wikipedia.org/wiki/TensorFlow.',
+                        'Bhargava, Yash. "Top 26 Python Libraries for Data Science in 2025." DataCamp, 12 Jan. 2024, www.datacamp.com/blog/top-python-libraries-for-data-science.',
+                        'Kite. "10 Essential Data Science Packages for Python." Kite Blog, 12 Sept. 2019, www.kite.com/blog/python/data-science-packages-python/.',
+                        'Magoulas, Roger and Steve Lohr. "TensorFlow 2.1.0 Will Be the Last Version to Support Python 2." InfoQ, 10 Dec. 2019, www.infoq.com/news/2019/12/tensorflow-eol-python-2/.',
+                        '"The Complete History and Evolution of PyTorch." TensorGym Blog, 2 days ago, tensorgym.com/blog/pytorch-history.',
+                        'GeeksforGeeks. "History of Python." GeeksforGeeks.com, 2015.',
+                        'OpenCV. "Python Libraries Documentation." OpenCV.org.',
+                        'Severance, Charles. "Python for Everybody." 2015.',
                       ].map((citation, index) => (
                         <div
                           key={index}
@@ -1542,13 +1579,6 @@ data = pd.read_csv('data.csv')`,
                           </p>
                         </div>
                       ))}
-
-                      <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-dashed border-white/30 hover:border-white/50 transition-colors duration-300">
-                        <p className="text-gray-500 italic font-mono text-sm flex items-center gap-3">
-                          <span className="text-xl">➕</span>
-                          [Add additional sources as needed...]
-                        </p>
-                      </div>
                     </div>
                   </div>
 
@@ -1676,7 +1706,7 @@ data = pd.read_csv('data.csv')`,
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex gap-12">
           {/* Navigation Sidebar */}
-          <div className="w-80 flex-shrink-0">
+          <div className="w-80 flex-shrink-0 hidden lg:block">
             <div className="bg-white/5 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/10 p-8 sticky top-8">
               <h3 className="font-bold text-white mb-6 text-xl flex items-center gap-3">
                 <Terminal className="text-purple-400 animate-pulse" size={24} />
@@ -1691,10 +1721,7 @@ data = pd.read_csv('data.csv')`,
               <div className="mt-8 pt-8 border-t border-white/10">
                 <div className="text-xs text-gray-400 space-y-3">
                   <div className="flex items-center gap-2">
-                    <Sparkles
-                      size={16}
-                      className="text-purple-400 animate-spin"
-                    />
+                    <Sparkles size={16} className="text-purple-400" />
                     <span>
                       <strong>Unifying Theme:</strong> Interactive Python code
                       throughout
@@ -1709,8 +1736,8 @@ data = pd.read_csv('data.csv')`,
                   <div className="flex items-center gap-2">
                     <Code size={16} className="text-blue-400 animate-pulse" />
                     <span>
-                      <strong>Animations:</strong> Floating code & syntax
-                      highlighting
+                      <strong>Animations:</strong> Smooth transitions & hover
+                      effects
                     </span>
                   </div>
                 </div>

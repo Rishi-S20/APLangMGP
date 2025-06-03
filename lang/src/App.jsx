@@ -568,24 +568,24 @@ const PythonMGPWebsite = () => {
 
                 <div className="space-y-8">
                   <div className="relative aspect-video bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-white/10 overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-20"></div>
 
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="mb-6 relative">
-                          <Play
-                            className="mx-auto text-white mb-4 group-hover:scale-110 transition-transform duration-300 cursor-pointer"
-                            size={64}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
-                        </div>
-                        <p className="text-white font-bold text-2xl mb-2">
-                          Flower Recognition with CNN
-                        </p>
-                        <p className="text-gray-400">
-                          Building and training a deep learning model in Python
-                        </p>
-                      </div>
+                    <iframe
+                      className="relative z-10 w-full h-full rounded-2xl"
+                      src="https://drive.google.com/file/d/18DNtydlo25zMJn9sx-G8sznaSW5LB3MG/preview"
+                      allow="autoplay"
+                      allowFullScreen
+                      title="Flower Recognition with CNN"
+                    />
+
+                    {/* Video title overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 pointer-events-none">
+                      <p className="text-white font-bold text-xl mb-1">
+                        Flower Recognition with CNN
+                      </p>
+                      <p className="text-gray-300 text-sm">
+                        Building and training a deep learning model in Python
+                      </p>
                     </div>
                   </div>
 
